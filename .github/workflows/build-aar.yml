@@ -1,0 +1,35 @@
+name: Build Go Android AAR
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.24'   # adjust if needed
+
+    - name: Install gomobile
+      run: |
+        go install golang.org/x/mobile/cmd/gomobile@latest
+        go install golang.org/x/mobile/cmd/gobind@latest
+        $(go env GOPATH)/bin/gomobile init
+
+    - name: Build AAR
+      run: |
+        $(go env GOPATH)/bin/gomobile bind -target=android -o blowfishlib.aar ./blowfishlib
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: blowfishlib.aar
+        path: blowfishlib.aar
