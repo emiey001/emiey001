@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Go
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: '1.24'   # adjust if needed
 
@@ -29,7 +29,8 @@ jobs:
         $(go env GOPATH)/bin/gomobile bind -target=android -o blowfishlib.aar ./blowfishlib
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: blowfishlib.aar
+        name: blowfishlib
         path: blowfishlib.aar
+        
