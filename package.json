@@ -1,0 +1,21 @@
+{
+  "name": "playground",
+  "main": "index.ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "frida-compile -o _.js -w index.js"
+  },
+  "devDependencies": {
+    "@types/frida-gum": "^18.3.1",
+    "frida-compile": "^16.2.2",
+    "frida-il2cpp-bridge": "*",
+    "javascript-obfuscator": "^4.1.1"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^2.0.1",
+    "@noble/hashes": "^2.0.1",
+    "esbuild": "^0.27.0"
+  }
+}
