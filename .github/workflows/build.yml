@@ -1,0 +1,38 @@
+name: Compile Frida Script
+
+on:
+  push:
+    branches:
+      - main # Trigger this workflow whenever code is pushed to the main branch
+  workflow_dispatch:
+    # Allows you to manually trigger the workflow from the GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        # This action installs Node.js for use in the workflow
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use a stable Node.js version
+
+      - name: Install dependencies
+        # Installs frida-compile and frida-il2cpp-bridge
+        run: npm install
+
+      - name: Compile the Frida script
+        # Runs the build script defined in package.json
+        run: npm run build
+
+      - name: Upload the compiled bundle as an artifact
+        # Saves the resulting bundle.js file so you can download it
+        uses: actions/upload-artifact@v4
+        with:
+          name: frida-bundle
+          path: bundle.js
+          
