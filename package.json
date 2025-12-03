@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "frida-compile -o _.js -w index.js"
+    "build": "frida-compile index.js -o bundle.js"
   },
   "devDependencies": {
     "@types/frida-gum": "^18.3.1",
